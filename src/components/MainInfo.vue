@@ -1,3 +1,20 @@
+<script setup>
+import { ref,computed } from 'vue';
+
+const counter = ref(1)
+let price = ref(250);
+let discountPercentage = ref(50);
+
+const calcDiscountedPrice = computed(() => {
+  return (discountPercentage.value / 100 * price.value) * counter.value
+})
+const handleCounter = (num) => {
+  if (counter.value >= 1) {
+    if (counter.value == 1 && num == -1) return
+    counter.value += num
+  }
+}
+</script>
 <template>
   <div class="product__info">
     <h3 class="product__info__company">Sneaker Company</h3>
@@ -6,30 +23,38 @@
     <div class="product__info__priceContainer">
       <div>
         <span class="price">
-          $125.00
+          ${{
+            calcDiscountedPrice % 1 === 0
+              ? calcDiscountedPrice + ".00"
+              : calcDiscountedPrice
+          }}
         </span>
         <span class="percentageDiscount">
           50%
         </span>
       </div>
       <div class="discount">
-        $250.00
+        ${{price}}.00
       </div>
     </div>
-    <button class="bigBtn btn-count">
-      <span class="btn-count__symbol">-</span> <span>0</span> <span class="btn-count__symbol">+</span>
-    </button>
-    <button class="bigBtn btn-orange">
-      <img src="../assets/icon-cart-white.svg" alt="icon cart">
-      Add to cart
-    </button>
+    <div class="btnContainer">
+      <button class="bigBtn btn-count">
+        <span class="btn-count__symbol" @click="handleCounter(-1)">-</span>
+          <span>{{counter}}</span>
+        <span class="btn-count__symbol" @click="handleCounter(1)">+</span>
+      </button>
+      <button class="bigBtn btn-orange">
+        <img src="../assets/icon-cart-white.svg" alt="icon cart">
+        Add to cart
+      </button>
+    </div>
   </div>
 </template>
 <style>
 .product__info {
   display: flex;
   flex-direction: column;
-  padding: 24px 28px;
+  padding: 30px 28px;
   margin-bottom: 5rem;
 }
 .product__info__company {
@@ -77,7 +102,11 @@
   color: var(--Grayish-blue);
   text-decoration: line-through;
 }
-
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .bigBtn {
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 22px;
