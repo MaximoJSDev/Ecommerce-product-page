@@ -51,7 +51,7 @@ const handleClickImagePreview = ({target}) => {
 .product__slider {
   position: relative;
   width: 100%;
-  height: 445px;
+  height: 27.8125rem;
   display: flex;
   overflow-x: hidden;
   user-select: none;
@@ -69,8 +69,8 @@ const handleClickImagePreview = ({target}) => {
   z-index: 22;
 }
 .btn {
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   background-color: #fff;
   border-radius: 100%;
   display: flex;
@@ -79,7 +79,7 @@ const handleClickImagePreview = ({target}) => {
   cursor: pointer;
 }
 .btn img {
-  height: 18px;
+  height: 1.125rem;
 }
 .product__slider__image {
   width: 100%;

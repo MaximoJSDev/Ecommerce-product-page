@@ -54,51 +54,51 @@ const handleCounter = (num) => {
 .product__info {
   display: flex;
   flex-direction: column;
-  padding: 30px 28px;
+  padding: 1.875rem 1.75rem;
   margin-bottom: 5rem;
 }
 .product__info__company {
   color: var(--Orange);
   text-transform: uppercase;
-  font-size: 16px;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
+  font-size: 1rem;
+  letter-spacing: .125rem;
+  margin-bottom: .9375rem;
 }
 .product__info__title {
   font-weight: 700;
-  font-size: 37px;
-  margin-bottom: 15px;
+  font-size: 2.3125rem;
+  margin-bottom: .9375rem;
 }
 .product__info__text {
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 1.25rem;
+  line-height: 2rem;
   color: var(--Dark-grayish-blue);
 }
 .product__info__priceContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 7px;
+  margin-top: 2.5rem;
+  margin-bottom: .4375rem;
   font-weight: 700;
 }
 .product__info__priceContainer > div {
   display: flex;
   align-items: center;
-  column-gap: 20px;
+  column-gap: 1.25rem;
 }
 .price {
-  font-size: 37px;
+  font-size: 2.3125rem;
 }
 .percentageDiscount {
-  font-size: 22px;
+  font-size: 1.375rem;
   color: var(--Orange);
   background-color: var(--Pale-orange);
-  padding: 5px 9px;
-  border-radius: 10px;
+  padding: .3125rem .5625rem;
+  border-radius: .625rem;
 }
 .discount {
-  font-size: 21px;
+  font-size: 1.3125rem;
   color: var(--Grayish-blue);
   text-decoration: line-through;
 }
@@ -109,32 +109,33 @@ const handleCounter = (num) => {
 }
 .bigBtn {
   font-family: 'Kumbh Sans', sans-serif;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 700;
   display: flex;
   align-items: center;
-  padding: 22px 30px;
-  border-radius: 13px;
+  padding: 1.375rem 1.875rem;
+  border-radius: .8125rem;
   border: none;
-  margin-top: 22px;
+  margin-top: 1.375rem;
 }
 .btn-count {
   justify-content: space-between;
   background-color: var(--Light-grayish-blue);
+  align-items: baseline;
 }
 .btn-count__symbol {
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 1.5rem;
   color: var(--Orange);
   cursor: pointer;
 }
 .btn-orange {
   justify-content: center;
-  column-gap: 20px;
+  column-gap: 1.25rem;
   background-color: var(--Orange);
   color: #fff;
-  box-shadow: 0 33px 50px -17px #ff7d1a87;
+  box-shadow: 0 2.0625rem 3.125rem -1.0625rem #ff7d1a87;
   cursor: pointer;
 }
 </style>

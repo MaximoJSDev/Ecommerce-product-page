@@ -26,32 +26,32 @@
 
 <style scoped>
 .header {
-  max-width: 1280px;
+  max-width: 80rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 26px 30px;
+  padding: 1.625rem 1.875rem;
   margin: auto;
 }
 .header div:not(.header__menu__linksContainer) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 25px;
+  column-gap: 1.5625rem;
 }
 .header__iconMenu {
-  height: 20px;
+  height: 1.25rem;
   align-self: center;
-  margin-top: 4px;
+  margin-top: .25rem;
 }
 .header__logo {
-  height: 28px;
+  height: 1.75rem;
 }
 .header__profile__cart {
-  height: 27px;
+  height: 1.5rem;
 }
 .header__profile__avatar {
-  height: 38px;
+  height: 2.375rem;
 }
 .header__menu__linksContainer {
   display: none;
@@ -61,9 +61,9 @@
   justify-content: center;
   align-items: center;
   list-style: none;
-  column-gap: 30px;
-  font-size: 18px;
-  margin-left: 35px;
+  column-gap: 1.875rem;
+  font-size: 1.125rem;
+  margin-left: 2.1875rem;
 }
 .header__menu__linksContainer li {
   cursor: pointer;
