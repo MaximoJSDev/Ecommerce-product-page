@@ -1,13 +1,18 @@
 <script setup>
+import { ref } from 'vue';
 
+const menuContent = ref(null)
+const toggleMenu = () => {
+  menuContent.value.classList.toggle("showMenu")
+}
 </script>
-
 <template>
   <header class="header">
     <div class="header__menu">
-      <img class="header__iconMenu" src="../assets/icon-menu.svg" alt="icon menu">
+      <img class="header__iconMenu" src="../assets/icon-menu.svg" alt="icon menu" @click="toggleMenu">
       <img class="header__logo" src="../assets/logo.svg" alt="logo">
-    <div class="header__menu__linksContainer">
+    <div class="header__menu__linksContainer" ref="menuContent">
+      <img class="icon-close" src="../assets/icon-close.svg" alt="icon close" @click="toggleMenu">
       <ul class="links">
         <li>Collections</li>
         <li>Men</li>
@@ -23,7 +28,6 @@
     </div>
   </header>
 </template>
-
 <style scoped>
 .header {
   max-width: 80rem;
@@ -43,17 +47,19 @@
   height: 1.25rem;
   align-self: center;
   margin-top: .25rem;
+  cursor: pointer;
 }
 .header__logo {
   height: 1.75rem;
 }
 .header__profile__cart {
   height: 1.5rem;
+  cursor: pointer;
 }
 .header__profile__avatar {
   height: 2.375rem;
 }
-.header__menu__linksContainer {
+.header__menu__linksContainer, .icon-close {
   display: none;
 }
 .header__menu__linksContainer ul {
@@ -62,10 +68,44 @@
   align-items: center;
   list-style: none;
   column-gap: 1.875rem;
-  font-size: 1.125rem;
+  font-size: 1.185rem;
   margin-left: 2.1875rem;
 }
 .header__menu__linksContainer li {
   cursor: pointer;
+}
+@media (max-width: 1340px) {
+  .header__menu__linksContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #fff;
+    width: 22.625rem;
+    padding-left: 2.0625rem;
+    padding-top: 2.0625rem;
+    box-shadow: 2rem 0 40px #00000069;
+    z-index: 222;
+  }
+  .showMenu {
+    display: flex;
+  }
+  .icon-close {
+    display: block;
+    height: 1.35rem;
+    cursor: pointer;
+    margin-bottom: 5rem;
+  }
+  .header__menu__linksContainer ul {
+    flex-direction: column;
+    margin-left: 0;
+    align-items: flex-start;
+    font-weight: 700;
+    font-size: 1.35rem;
+    row-gap: 2rem;
+  }
 }
 </style>
