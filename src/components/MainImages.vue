@@ -1,23 +1,11 @@
 <script setup>
 import ProductImage from './ProductImage.vue';
+import ProductImageThumbnail from './ProductImageThumbnail.vue';
 
-const handleClickSlider = (direction) => {
-  const sliders = [...document.querySelectorAll(".product__slider__image")]
-  const currentElement = Number(document.querySelector(".imageSliderShow").dataset.id);
-  let valueDirection = currentElement + direction;
-  if (valueDirection === 0 || valueDirection == sliders.length+1) {
-    valueDirection = valueDirection === 0 ? sliders.length : 1;
-  }
-  sliders[currentElement-1].classList.toggle("imageSliderShow");
-  sliders[valueDirection-1].classList.toggle("imageSliderShow");
-};
-
-const handleClickImagePreview = ({target}) => {
-  [...target.parentElement.children].forEach((element) => {
-    element.classList.remove("imgPreview--active")
-  })
-  target.classList.add("imgPreview--active")
-};
+defineProps({
+  handleClickSlider: { type: Function },
+  handleClickImageThumbnail: { type: Function }
+});
 </script>
 <template>
   <div class="product__images">
@@ -30,16 +18,16 @@ const handleClickImagePreview = ({target}) => {
           <img src="../assets/icon-next.svg" alt="icon next">
         </div>
       </div>
-      <ProductImage id="1" :isShowImg="true" :isPreview="false" />
-      <ProductImage id="2" :isPreviewImg="false" />
-      <ProductImage id="3" :isPreviewImg="false" />
-      <ProductImage id="4" :isPreviewImg="false" />
+      <ProductImage id="1" :isShowImg="true" />
+      <ProductImage id="2" />
+      <ProductImage id="3" />
+      <ProductImage id="4" />
     </div>
     <figure class="product__figure">
-      <ProductImage id="1" :isPreviewImg="true" @click="handleClickImagePreview" />
-      <ProductImage id="2" :isPreviewImg="true" @click="handleClickImagePreview" />
-      <ProductImage id="3" :isPreviewImg="true" @click="handleClickImagePreview" />
-      <ProductImage id="4" :isPreviewImg="true" @click="handleClickImagePreview" />
+      <ProductImageThumbnail id="1" @click="handleClickImageThumbnail" :isActiveImg="true" />
+      <ProductImageThumbnail id="2" @click="handleClickImageThumbnail" />
+      <ProductImageThumbnail id="3" @click="handleClickImageThumbnail" />
+      <ProductImageThumbnail id="4" @click="handleClickImageThumbnail" />
     </figure>
   </div>
 </template>
@@ -94,7 +82,6 @@ const handleClickImagePreview = ({target}) => {
   opacity: 1;
   z-index: 11;
 }
-
 .product__figure {
   display: none;
 }
