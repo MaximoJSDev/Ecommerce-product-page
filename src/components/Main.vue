@@ -45,7 +45,8 @@ const exitImageFocus = ({target}) => {
   if (
     target.classList.contains("containerFocus") || 
     target.classList.contains("containerFocus__iconClose") ||
-    target.classList.contains("containerFocus__iconClose__img")
+    target.classList.contains("containerFocus__iconClose__svg") ||
+    target.classList.contains("containerFocus__iconClose__path")
   ) {
     containerFocus.value.classList.remove("show");
   }
