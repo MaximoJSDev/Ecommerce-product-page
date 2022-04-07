@@ -50,6 +50,10 @@ body {
   .header__profile__avatar {
     height: 3.5625rem !important;
   }
+  .cart {
+    top: 102px;
+    margin-right: -1.75rem;
+  }
   .product {
     max-width: 75rem;
     flex-direction: row;

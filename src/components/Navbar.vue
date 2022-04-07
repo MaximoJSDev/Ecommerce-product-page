@@ -1,9 +1,16 @@
 <script setup>
 import { ref } from 'vue';
+import NavbarCart from './NavbarCart.vue';
 
 const menuContent = ref(null)
+const display = ref("none")
 const toggleMenu = () => {
   menuContent.value.classList.toggle("showMenu")
+}
+const showCart = () => {
+  display.value = display.value == "none" 
+    ? "block" 
+    : "none"
 }
 </script>
 <template>
@@ -11,25 +18,27 @@ const toggleMenu = () => {
     <div class="header__menu">
       <img class="header__iconMenu" src="../assets/icon-menu.svg" alt="icon menu" @click="toggleMenu">
       <img class="header__logo" src="../assets/logo.svg" alt="logo">
-    <div class="header__menu__linksContainer" ref="menuContent">
-      <img class="icon-close" src="../assets/icon-close.svg" alt="icon close" @click="toggleMenu">
-      <ul class="links">
-        <li>Collections</li>
-        <li>Men</li>
-        <li>Women</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </div>
+      <div class="header__menu__linksContainer" ref="menuContent">
+        <img class="icon-close" src="../assets/icon-close.svg" alt="icon close" @click="toggleMenu">
+        <ul class="links">
+          <li>Collections</li>
+          <li>Men</li>
+          <li>Women</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </div>
     </div>
     <div class="header__profile">
-      <img class="header__profile__cart" src="../assets/icon-cart.svg" alt="icon cart">
+      <img class="header__profile__cart" src="../assets/icon-cart.svg" alt="icon cart" @click="showCart">
       <img class="header__profile__avatar" src="../assets/image-avatar.png" alt="image avatar">
     </div>
+    <NavbarCart :display="display" />
   </header>
 </template>
 <style scoped>
 .header {
+  position: relative;
   max-width: 80rem;
   display: flex;
   align-items: center;
@@ -37,7 +46,7 @@ const toggleMenu = () => {
   padding: 1.625rem 1.875rem;
   margin: auto;
 }
-.header div:not(.header__menu__linksContainer) {
+.header > div:not(.cart) {
   display: flex;
   align-items: center;
   justify-content: space-between;
