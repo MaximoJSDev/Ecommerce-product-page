@@ -3,6 +3,10 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import Navbar from './components/Navbar.vue';
 import Main from './components/Main.vue';
+import { provide, ref } from 'vue';
+
+const cart = ref();
+provide("cart", cart)
 </script>
 
 <template>

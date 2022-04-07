@@ -1,18 +1,38 @@
 <script setup>
-import { ref,computed } from 'vue';
+import { ref,computed, inject } from 'vue';
 
-const counter = ref(1)
-let price = ref(250);
-let discountPercentage = ref(50);
+
+const cart = inject("cart")
+const price = 125;
+const discountPercentage = 50;
+const toCarry = ref(1);
+const oldPrice = ref(250);
 
 const calcDiscountedPrice = computed(() => {
-  return (discountPercentage.value / 100 * price.value) * counter.value
-})
+  return (discountPercentage / 100 * oldPrice.value) * toCarry.value
+});
+
+const calcTotalPrice  = computed(() => {
+  let totalPrice =  calcDiscountedPrice.value % 1 === 0
+    ? calcDiscountedPrice.value + ".00"
+    : calcDiscountedPrice.value
+  return totalPrice
+});
+
 const handleCounter = (num) => {
-  if (counter.value >= 1) {
-    if (counter.value == 1 && num == -1) return
-    counter.value += num
+  if (toCarry.value >= 1) {
+    if (toCarry.value == 1 && num == -1) return
+    toCarry.value += num
   }
+};
+
+const addToCart = () => {
+  cart.value = {
+    name: "Autumn Limited Edition...",
+    price: price,
+    toCarry: toCarry.value,
+    total: calcTotalPrice.value
+  };
 }
 </script>
 <template>
@@ -23,27 +43,23 @@ const handleCounter = (num) => {
     <div class="product__info__priceContainer">
       <div>
         <span class="price">
-          ${{
-            calcDiscountedPrice % 1 === 0
-              ? calcDiscountedPrice + ".00"
-              : calcDiscountedPrice
-          }}
+          ${{calcTotalPrice}}
         </span>
         <span class="percentageDiscount">
-          50%
+          {{discountPercentage}}%
         </span>
       </div>
       <div class="discount">
-        ${{price}}.00
+        ${{oldPrice}}.00
       </div>
     </div>
     <div class="btnContainer">
       <button class="bigBtn btn-count">
         <span class="btn-count__symbol" @click="handleCounter(-1)">-</span>
-          <span>{{counter}}</span>
+          <span>{{toCarry}}</span>
         <span class="btn-count__symbol" @click="handleCounter(1)">+</span>
       </button>
-      <button class="bigBtn btn-orange">
+      <button class="bigBtn btn-orange" @click="addToCart">
         <img src="../assets/icon-cart-white.svg" alt="icon cart">
         Add to cart
       </button>

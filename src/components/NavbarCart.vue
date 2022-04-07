@@ -1,26 +1,17 @@
 <script setup>
-defineProps({
-  display: {
-    type: String,
-    default: "none"
-  },
-  isEmpty: {
-    type: Boolean,
-    default: true
-  }
-});
+import { inject } from 'vue';
 
-const products = {
-  name: "Autumn Limited Edition...",
-  price: 125.00,
-  toCarry: 3,
-  total: "$375.00"
+defineProps({display: { type: String, default: "none"}});
+const products = inject("cart");
+const clearCart = () => {
+  products.value = undefined
 }
+
 </script>
 <template>
 <div class="cart" :style="{ display: display, }">
   <h6 class="cart__title">Cart</h6>
-  <div class="cart__body" v-if="!isEmpty">
+  <div class="cart__body" v-if="products !== undefined">
     <div class="cart__product">
       <img 
         class="cart__product__img"
@@ -32,10 +23,10 @@ const products = {
         <div class="cart__product__details">
           <span class="product-price">${{products.price}}</span>
           <span class="product-number">x {{products.toCarry}}</span>
-          <span class="product-total">{{products.total}}</span>
+          <span class="product-total">${{products.total}}</span>
         </div>
       </div>
-      <img class="cart__product__delete" src="../assets/icon-delete.svg" alt="icon delete">
+      <img class="cart__product__delete" src="../assets/icon-delete.svg" alt="icon delete" @click="clearCart">
     </div>
     <button class="cart__body__btn bigBtn btn-orange">Checkout</button>
   </div>
@@ -100,6 +91,7 @@ const products = {
 }
 .cart__product__delete {
   height: 20px;
+  cursor: pointer;
 }
 
 .cart__isEmpty {
