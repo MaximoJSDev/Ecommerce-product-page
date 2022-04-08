@@ -3,6 +3,9 @@ import { inject } from 'vue';
 
 const display = inject("display");
 const products = inject("cart");
+const clearCart = () => {
+  products.value = undefined
+}
 </script>
 <template>
 <div class="cart" :style="{ display: display }">
