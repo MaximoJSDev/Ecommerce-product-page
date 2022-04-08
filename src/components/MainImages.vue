@@ -1,11 +1,44 @@
 <script setup>
+import { inject } from 'vue';
 import ProductImage from './ProductImage.vue';
 import ProductImageThumbnail from './ProductImageThumbnail.vue';
 
-defineProps({
-  handleClickSlider: { type: Function },
-  handleClickImageThumbnail: { type: Function }
-});
+const containerFocus = inject("containerFocus");
+
+const handleClickSlider = (direction, positionDef) => {
+  // Slider de imagenes (Normal)
+  selecSlider(direction, ".product__slider__image", false, positionDef);
+  // Slider de imagenes (thumbnail)
+  selecSlider(direction, ".product__figure div", true, positionDef);
+};
+
+const selecSlider = (direction, classImg, isThumbnail, positionDef) => {
+  const sliders = [...document.querySelectorAll(classImg)];
+  const slider1 = sliders.splice(0, sliders.length/2);
+  const slider2 = sliders.splice(0, sliders.length);
+  const selector = isThumbnail ? "imgThumbnail--active" : "imageSliderShow"
+  const currentElement = Number(document.querySelector("."+selector).dataset.id);
+  let valueDirection = positionDef ? positionDef : currentElement + direction;
+  if (valueDirection === 0 || valueDirection == slider1.length+1) {
+    // Si llega al limite del slider, se reinicia
+    valueDirection = valueDirection === 0 ? slider1.length : 1;
+  }
+  changeImageToShow(slider1, slider2, currentElement, valueDirection, selector)
+}
+
+const changeImageToShow = (slider1, slider2, currentElement, valueDirection, selector) => {
+  // Remueve la clase activa anterior (IMG)
+  slider1[currentElement-1].classList.remove(selector);
+  slider2[currentElement-1].classList.remove(selector);
+  // Agrega la clase activa nueva (IMG)
+  slider1[valueDirection-1].classList.add(selector);
+  slider2[valueDirection-1].classList.add(selector);
+}
+
+const handleClickImageThumbnail = ({target}) => {
+  containerFocus.value.classList.add("show")
+  handleClickSlider(0, target.dataset.id)
+};
 </script>
 <template>
   <div class="product__images">
