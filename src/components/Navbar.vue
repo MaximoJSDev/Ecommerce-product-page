@@ -4,6 +4,8 @@ import NavbarCart from './NavbarCart.vue';
 
 const menuContent = ref(null);
 const display = inject("display");
+const products = inject("cart");
+
 const toggleMenu = () => {
   menuContent.value.classList.toggle("showMenu");
 }
@@ -30,7 +32,12 @@ const showCart = () => {
       </div>
     </div>
     <div class="header__profile">
-      <img class="header__profile__cart" src="../assets/icon-cart.svg" alt="icon cart" @click="showCart">
+      <div class="header__profile__cart" @click="showCart">
+        <span class="header__profile__cart__notification" v-if="products !== undefined">
+          {{products.toCarry}}
+        </span>
+        <img src="../assets/icon-cart.svg" alt="icon cart">
+      </div>
       <img class="header__profile__avatar" src="../assets/image-avatar.png" alt="image avatar">
     </div>
     <NavbarCart />
@@ -62,8 +69,27 @@ const showCart = () => {
   height: 1.75rem;
 }
 .header__profile__cart {
+  position: relative;
   height: 1.5rem;
+  width: 1.4rem;
   cursor: pointer;
+}
+.header__profile__cart img {
+  width: 100%;
+  height: 100%;
+}
+.header__profile__cart__notification {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  width: 26px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 2px 7px;
+  background-color: var(--Orange);
+  color: #fff;
+  border-radius: 9px;
 }
 .header__profile__avatar {
   height: 2.375rem;
@@ -85,7 +111,9 @@ const showCart = () => {
 }
 @media (max-width: 1340px) {
   .header__menu__linksContainer {
-    position: absolute;
+    width: 22.625rem;
+    min-height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -93,7 +121,6 @@ const showCart = () => {
     justify-content: flex-start;
     align-items: flex-start;
     background-color: #fff;
-    width: 22.625rem;
     padding-left: 2.0625rem;
     padding-top: 2.0625rem;
     box-shadow: 2rem 0 40px #00000069;
