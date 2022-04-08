@@ -1,15 +1,11 @@
 <script setup>
 import { inject } from 'vue';
 
-defineProps({display: { type: String, default: "none"}});
+const display = inject("display");
 const products = inject("cart");
-const clearCart = () => {
-  products.value = undefined
-}
-
 </script>
 <template>
-<div class="cart" :style="{ display: display, }">
+<div class="cart" :style="{ display: display }">
   <h6 class="cart__title">Cart</h6>
   <div class="cart__body" v-if="products !== undefined">
     <div class="cart__product">
@@ -26,7 +22,12 @@ const clearCart = () => {
           <span class="product-total">${{products.total}}</span>
         </div>
       </div>
-      <img class="cart__product__delete" src="../assets/icon-delete.svg" alt="icon delete" @click="clearCart">
+      <img 
+        class="cart__product__delete" 
+        src="../assets/icon-delete.svg" 
+        alt="icon delete" 
+        @click="clearCart"
+      >
     </div>
     <button class="cart__body__btn bigBtn btn-orange">Checkout</button>
   </div>

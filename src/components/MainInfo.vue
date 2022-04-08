@@ -7,6 +7,7 @@ const price = 125;
 const discountPercentage = 50;
 const toCarry = ref(1);
 const oldPrice = ref(250);
+const display = inject("display");
 
 const calcDiscountedPrice = computed(() => {
   return (discountPercentage / 100 * oldPrice.value) * toCarry.value
@@ -33,6 +34,7 @@ const addToCart = () => {
     toCarry: toCarry.value,
     total: calcTotalPrice.value
   };
+  display.value = "block"
 }
 </script>
 <template>

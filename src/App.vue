@@ -6,7 +6,9 @@ import Main from './components/Main.vue';
 import { provide, ref } from 'vue';
 
 const cart = ref();
-provide("cart", cart)
+provide("cart", cart);
+const display = ref("none")
+provide("display", display);
 </script>
 
 <template>

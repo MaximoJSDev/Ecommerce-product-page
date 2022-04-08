@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import NavbarCart from './NavbarCart.vue';
 
-const menuContent = ref(null)
-const display = ref("none")
+const menuContent = ref(null);
+const display = inject("display");
 const toggleMenu = () => {
-  menuContent.value.classList.toggle("showMenu")
+  menuContent.value.classList.toggle("showMenu");
 }
 const showCart = () => {
   display.value = display.value == "none" 
@@ -33,7 +33,7 @@ const showCart = () => {
       <img class="header__profile__cart" src="../assets/icon-cart.svg" alt="icon cart" @click="showCart">
       <img class="header__profile__avatar" src="../assets/image-avatar.png" alt="image avatar">
     </div>
-    <NavbarCart :display="display" />
+    <NavbarCart />
   </header>
 </template>
 <style scoped>
