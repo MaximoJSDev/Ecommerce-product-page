@@ -3,12 +3,21 @@ import { inject, ref } from 'vue';
 import NavbarCart from './NavbarCart.vue';
 
 const menuContent = ref(null);
+const marker = ref(null);
+const links = ref([]);
+const list = ["Collections", "Men", "Women", "About", "Contact"];
 const display = inject("display");
 const products = inject("cart");
 
 const toggleMenu = () => {
   menuContent.value.classList.toggle("showMenu");
 }
+
+const moveIndicator = (e) => {
+  marker.value.style.left = e.target.offsetLeft+'px';
+  marker.value.style.width = e.target.offsetWidth+'px';
+}
+
 const showCart = () => {
   display.value = display.value == "none" 
     ? "block" 
@@ -19,15 +28,19 @@ const showCart = () => {
   <header class="header">
     <div class="header__menu">
       <img class="header__iconMenu" src="../assets/icon-menu.svg" alt="icon menu" @click="toggleMenu">
-      <img class="header__logo" src="../assets/logo.svg" alt="logo">
+      <img class="header__logo" src="../assets/logo.svg" alt="logo" @click="moveIndicator">
       <div class="header__menu__linksContainer" ref="menuContent">
         <img class="icon-close" src="../assets/icon-close.svg" alt="icon close" @click="toggleMenu">
-        <ul class="links">
-          <li>Collections</li>
-          <li>Men</li>
-          <li>Women</li>
-          <li>About</li>
-          <li>Contact</li>
+        <ul class="header__menu__links">
+          <li 
+            v-for="(item,index) in list" 
+            :ref="el => links.push(el)" 
+            :key="index"
+            @click="moveIndicator"
+          >
+            {{item}}
+          </li>
+          <div class="header__menu__marker" ref="marker"></div>
         </ul>
       </div>
     </div>
@@ -67,6 +80,13 @@ const showCart = () => {
 }
 .header__logo {
   height: 1.75rem;
+}
+.header__menu__marker {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background-color: var(--Orange);
+  transition: .3s;
 }
 .header__profile__cart {
   position: relative;
@@ -125,6 +145,9 @@ const showCart = () => {
     padding-top: 2.0625rem;
     box-shadow: 2rem 0 40px #00000069;
     z-index: 222;
+  }
+  .header__menu__marker {
+    display: none;
   }
   .showMenu {
     display: flex;
