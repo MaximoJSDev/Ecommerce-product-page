@@ -1,62 +1,17 @@
 <script setup>
-import { inject, ref } from 'vue';
+import NavbarMenu from './NavbarMenu.vue';
+import NavbarProfile from './NavbarProfile.vue';
 import NavbarCart from './NavbarCart.vue';
 
-const menuContent = ref(null);
-const marker = ref(null);
-const links = ref([]);
-const list = ["Collections", "Men", "Women", "About", "Contact"];
-const display = inject("display");
-const products = inject("cart");
-
-const toggleMenu = () => {
-  menuContent.value.classList.toggle("showMenu");
-}
-
-const moveIndicator = (e) => {
-  marker.value.style.left = e.target.offsetLeft+'px';
-  marker.value.style.width = e.target.offsetWidth+'px';
-}
-
-const showCart = () => {
-  display.value = display.value == "none" 
-    ? "block" 
-    : "none"
-}
 </script>
 <template>
   <header class="header">
-    <div class="header__menu">
-      <img class="header__iconMenu" src="../assets/icon-menu.svg" alt="icon menu" @click="toggleMenu">
-      <img class="header__logo" src="../assets/logo.svg" alt="logo" @click="moveIndicator">
-      <div class="header__menu__linksContainer" ref="menuContent">
-        <img class="icon-close" src="../assets/icon-close.svg" alt="icon close" @click="toggleMenu">
-        <ul class="header__menu__links">
-          <li 
-            v-for="(item,index) in list" 
-            :ref="el => links.push(el)" 
-            :key="index"
-            @click="moveIndicator"
-          >
-            {{item}}
-          </li>
-          <div class="header__menu__marker" ref="marker"></div>
-        </ul>
-      </div>
-    </div>
-    <div class="header__profile">
-      <div class="header__profile__cart" @click="showCart">
-        <span class="header__profile__cart__notification" v-if="products !== undefined">
-          {{products.toCarry}}
-        </span>
-        <img src="../assets/icon-cart.svg" alt="icon cart">
-      </div>
-      <img class="header__profile__avatar" src="../assets/image-avatar.png" alt="image avatar">
-    </div>
+    <NavbarMenu />
+    <NavbarProfile />
     <NavbarCart />
   </header>
 </template>
-<style scoped>
+<style>
 .header {
   position: relative;
   max-width: 80rem;
