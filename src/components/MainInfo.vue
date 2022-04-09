@@ -2,28 +2,28 @@
 import { ref,computed, inject } from 'vue';
 
 
-const cart = inject("cart")
+const display = inject("display");
+const cart = inject("cart");
 const price = 125;
 const discountPercentage = 50;
 const toCarry = ref(1);
 const oldPrice = ref(250);
-const display = inject("display");
 
 const calcDiscountedPrice = computed(() => {
-  return (discountPercentage / 100 * oldPrice.value) * toCarry.value
+  return (discountPercentage / 100 * oldPrice.value) * toCarry.value;
 });
 
 const calcTotalPrice  = computed(() => {
   let totalPrice =  calcDiscountedPrice.value % 1 === 0
     ? calcDiscountedPrice.value + ".00"
     : calcDiscountedPrice.value
-  return totalPrice
+  return totalPrice;
 });
 
 const handleCounter = (num) => {
   if (toCarry.value >= 1) {
-    if (toCarry.value == 1 && num == -1) return
-    toCarry.value += num
+    if (toCarry.value == 1 && num == -1) return;
+    toCarry.value += num;
   }
 };
 
@@ -34,7 +34,7 @@ const addToCart = () => {
     toCarry: toCarry.value,
     total: calcTotalPrice.value
   };
-  display.value = "block"
+  display.value = "block";
 }
 </script>
 <template>
@@ -45,7 +45,7 @@ const addToCart = () => {
     <div class="product__info__priceContainer">
       <div>
         <span class="price">
-          ${{calcTotalPrice}}
+          ${{price}}.00
         </span>
         <span class="percentageDiscount">
           {{discountPercentage}}%
